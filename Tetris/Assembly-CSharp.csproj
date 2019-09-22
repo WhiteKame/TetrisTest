@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Game.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\OptionMenu.cs" />
+    <Compile Include="Assets\Scripts\SpawnTetremino.cs" />
     <Compile Include="Assets\Scripts\Tetris.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>/Users/luke/Documents/GitHub/TetrisTest/Tetris/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
