@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class Tetris : MonoBehaviour
 {
@@ -11,14 +14,18 @@ public class Tetris : MonoBehaviour
     public bool allowRotation = true;
     public bool limitRotation = false;
 
-    public static int width = 10;
-    public static int height = 20;
+    public static int width = 24;
+    public static int height = 30;
 
     public static Transform[,] grid = new Transform[width, height];
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (!CheckIsValidPosition())
+        {
+            SceneManager.LoadScene(3);
+        }
     }
 
     // Update is called once per frame
@@ -101,7 +108,7 @@ public class Tetris : MonoBehaviour
         }
 
 
-        if (Time.time - previousTime > (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S) ? fallSpeed / 10 : fallSpeed))
+        if (Time.time - previousTime > (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) ? fallSpeed / 10 : fallSpeed))
         {
             transform.position += new Vector3(0, -1, 0);
 
@@ -120,6 +127,7 @@ public class Tetris : MonoBehaviour
 
             previousTime = Time.time;
         }
+
     }
 
     void checkForLine()
@@ -130,6 +138,7 @@ public class Tetris : MonoBehaviour
             {
                 DeleteLine(i);
                 RowDown(i);
+                //GameScore.UpdateScore();
             }
         }
     }
