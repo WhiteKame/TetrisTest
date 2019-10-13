@@ -9,7 +9,6 @@ public class SpawnTetremino : MonoBehaviour
     void Start()
     {
         NewTetromino();
-        //NextTetromino();
     }
 
     // Update is called once per frame
@@ -21,10 +20,5 @@ public class SpawnTetremino : MonoBehaviour
     public void NewTetromino()
     {
         Instantiate(Tetrominoes[Random.Range(0, Tetrominoes.Length)],transform.position,Quaternion.identity);
-    }
-
-    void NextTetromino()
-    {
-        //Instantiate(Tetrominoes[Random.Range(1, Tetrominoes.Length)], new Vector2(15, 9), Quaternion.identity);
     }
 }

@@ -17,7 +17,13 @@ public class Tetris : MonoBehaviour
     public static int width = 24;
     public static int height = 30;
 
+    //public Canvas canvas;
+    int score;
+
     public static Transform[,] grid = new Transform[width, height];
+
+    Text scoreText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,8 +32,12 @@ public class Tetris : MonoBehaviour
         {
             SceneManager.LoadScene(3);
         }
-    }
 
+        score = PlayerPrefs.GetInt("score");
+        scoreText = GameObject.FindGameObjectWithTag("score").GetComponent<Text>();
+        score = int.Parse(scoreText.text);
+        //SetScore();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -108,7 +118,7 @@ public class Tetris : MonoBehaviour
         }
 
 
-        if (Time.time - previousTime > (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) ? fallSpeed / 10 : fallSpeed))
+        if (Time.time - previousTime > ((Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) ? fallSpeed / 10 : fallSpeed))
         {
             transform.position += new Vector3(0, -1, 0);
 
@@ -123,6 +133,7 @@ public class Tetris : MonoBehaviour
                 checkForLine();
                 this.enabled = false;
                 FindObjectOfType<SpawnTetremino>().NewTetromino();
+                
             }
 
             previousTime = Time.time;
@@ -139,6 +150,7 @@ public class Tetris : MonoBehaviour
                 DeleteLine(i);
                 RowDown(i);
                 //GameScore.UpdateScore();
+                AddScore();
             }
         }
     }
@@ -208,5 +220,18 @@ public class Tetris : MonoBehaviour
 
 
         return true;
+    }
+
+    void AddScore()
+    {
+        score = score + 1000;
+        scoreText.text = score.ToString();
+        Debug.Log(score);
+        PlayerPrefs.SetInt("score", score);
+    }
+
+    void SetScore()
+    {
+        scoreText.text = score.ToString();
     }
 }

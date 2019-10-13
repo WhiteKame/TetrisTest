@@ -5,14 +5,13 @@ using UnityEngine.UI;
 
 public class GameScore : MonoBehaviour
 {
-    public static Text ScoreText;
+    public Text ScoreText;
 
     int score;
-    int eachLine = 1000;
 
-    public void UpdateScore()
-	{
-		score += eachLine;
-		ScoreText.text = string.Format("{0:D2}", score);
-	}
+    private void Start()
+    {
+        score = PlayerPrefs.GetInt("score");
+        ScoreText.text = score.ToString();
+    }
 }
